@@ -1,10 +1,21 @@
 package main
 
 import (
-	"github.com/leandro-hoenen/go-cicd-pipeline-test/math"
+	"time"
+
+	math "github.com/leandro-hoenen/go-cicd-pipeline-test/math"
 )
 
 func main() {
-	println(math.Add(1, 2))
-	println(math.Sub(1, 2))
+	index := 1
+	for {
+		doubleInt := index * 2
+
+		println(math.Add(index, doubleInt))
+		println(math.Sub(doubleInt, index))
+
+		time.Sleep(30 * time.Second)
+
+		index++
+	}
 }
