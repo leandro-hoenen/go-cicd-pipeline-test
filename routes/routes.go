@@ -6,5 +6,6 @@ import (
 )
 
 func SetRoutes(router *gin.Engine) {
-	router.GET("/hello", handlers.HandleAdd)
+	router.GET("/add", handlers.HandleAdd)
+	router.GET("/sub", handlers.HandleSub)
 }
