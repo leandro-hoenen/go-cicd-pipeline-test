@@ -1,16 +1,16 @@
-package math
+package services
 
 import "testing"
 
 func TestAdd(t *testing.T) {
-	given := Add(3, 5)
+	given := AddOperation(3, 5)
 	expected := 8
 
 	intNotEqual(given, expected, t)
 }
 
 func TestSub(t *testing.T) {
-	given := Sub(5, 2)
+	given := SubOperation(5, 2)
 	expected := 3
 
 	intNotEqual(given, expected, t)
