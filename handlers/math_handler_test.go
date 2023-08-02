@@ -31,7 +31,7 @@ func TestHandleRandomAdd(t *testing.T) {
 	}
 
 	var response map[string]handlers.CompResult
-	err := json.Unmarshal([]byte(w.Body.String()), &response)
+	err := json.Unmarshal([]byte(w.Body.Bytes()), &response)
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
@@ -59,7 +59,7 @@ func TestHandleRandomSub(t *testing.T) {
 	}
 
 	var response map[string]handlers.CompResult
-	err := json.Unmarshal([]byte(w.Body.String()), &response)
+	err := json.Unmarshal([]byte(w.Body.Bytes()), &response)
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
@@ -91,7 +91,7 @@ func TestHandleAdd(t *testing.T) {
 	}
 
 	var response map[string]handlers.CompResult
-	err := json.Unmarshal([]byte(w.Body.String()), &response)
+	err := json.Unmarshal([]byte(w.Body.Bytes()), &response)
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
@@ -123,7 +123,7 @@ func TestHandleSub(t *testing.T) {
 	}
 
 	var response map[string]handlers.CompResult
-	err := json.Unmarshal([]byte(w.Body.String()), &response)
+	err := json.Unmarshal([]byte(w.Body.Bytes()), &response)
 	if err != nil {
 		t.Errorf("Failed to unmarshal response: %v", err)
 	}
