@@ -6,7 +6,10 @@ import (
 )
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
+
 	router := gin.Default()
 	routes.SetRoutes(router)
-	router.Run()
+
+	router.Run(":8080")
 }

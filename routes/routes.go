@@ -6,6 +6,8 @@ import (
 )
 
 func SetRoutes(router *gin.Engine) {
-	router.GET("/add", handlers.HandleAdd)
-	router.GET("/sub", handlers.HandleSub)
+	router.GET("/random/add", handlers.HandleRandomAdd)
+	router.GET("/random/sub", handlers.HandleRandomSub)
+	router.POST("/add", handlers.HandleAdd)
+	router.POST("/sub", handlers.HandleSub)
 }
