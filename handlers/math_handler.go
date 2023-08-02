@@ -1,7 +1,8 @@
 package handlers
 
 import (
-	"math/rand"
+	"crypto/rand"
+	"math/big"
 
 	"github.com/gin-gonic/gin"
 	"github.com/leandro-hoenen/go-cicd-pipeline-test/services"
@@ -18,8 +19,17 @@ type CompResult struct {
 }
 
 func HandleRandomAdd(c *gin.Context) {
-	summandOne := rand.Intn(100)
-	summandTwo := rand.Intn(100)
+	summandOne, errO := secureRandomInt(100)
+	if errO != nil {
+		c.JSON(400, gin.H{"error": "comp failed"})
+		return
+	}
+	summandTwo, errT := secureRandomInt(100)
+	if errT != nil {
+		c.JSON(400, gin.H{"error": "comp failed"})
+		return
+	}
+
 	sum := services.AddOperation(summandOne, summandTwo)
 
 	input := CompInput{
@@ -38,8 +48,18 @@ func HandleRandomAdd(c *gin.Context) {
 }
 
 func HandleRandomSub(c *gin.Context) {
-	minuend := rand.Intn(100)
-	subtrahend := rand.Intn(100)
+	minuend, errM := secureRandomInt(100)
+	if errM != nil {
+		c.JSON(400, gin.H{"error": "comp failed"})
+		return
+	}
+
+	subtrahend, errS := secureRandomInt(100)
+	if errS != nil {
+		c.JSON(400, gin.H{"error": "comp failed"})
+		return
+	}
+
 	difference := services.SubOperation(minuend, subtrahend)
 
 	input := CompInput{
@@ -100,4 +120,14 @@ func HandleSub(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"subResult": r,
 	})
+}
+
+// With the help of ChatGPT
+func secureRandomInt(max int) (int, error) {
+	n, err := rand.Int(rand.Reader, big.NewInt(int64(max)))
+	if err != nil {
+		return 0, err
+	}
+
+	return int(n.Int64()), nil
 }
