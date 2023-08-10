@@ -88,3 +88,22 @@ jobs:
         uses: securego/gosec@master
         with:
           args: ./...
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [integration-tests, performance-tests, code-quality-analysis, Go-Security]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Install dependencies
+        run: |
+          go get -u github.com/gin-gonic/gin
+
+      - name: Build
+        run: go build -v ./...
+        
